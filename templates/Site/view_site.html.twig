@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+            <div class="jumbotron col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                <h1 class="display-4">Bienvenue {{app.user.firstname}}</h1>
+                <p>Ici, vous avez accès à la supervision des sites</p>
+                <hr class="my-4">
+                <a href="{{path('add_site')}}" class="btn btn-primary">Ajouter un site</a>
+            </div>
+            <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+            <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom du site</th>
+                            <th scope="col">URL</th>
+                            <th scope="col">Code HTTP</th>
+                            <th scope="col">Modifier</th>
+                            <th scope="col">Supprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for site in sites %}
+                        <tr>
+                            <td>{{site.label}}</td>
+                            <td><a href="{{site.url}}">{{site.url}}</a></td>
+                            <td>{{site.status}}</td>
+                            <td><a href="{{path('modify_site', {'id': site.id })}}" class="btn btn-primary">Modifier</a></td>
+                            <td><a href="{{path('remove_site', {'id': site.id })}}" class="btn btn-danger">Supprimer</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+        </div>
+    </div>
+
+{% endblock %}
